@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/api-gateway/src",
+  "monorepo": true,
+  "root": "apps/api-gateway",
+  "compilerOptions": {
+    "webpack": false,
+    "tsConfigPath": "apps/api-gateway/tsconfig.app.json"
+  },
+  "projects": {
+    "api-gateway": {
+      "type": "application",
+      "root": "apps/api-gateway",
+      "entryFile": "main",
+      "sourceRoot": "apps/api-gateway/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/api-gateway/tsconfig.app.json"
+      }
+    },
+    "livekit-service": {
+      "type": "application",
+      "root": "apps/livekit-service",
+      "entryFile": "main",
+      "sourceRoot": "apps/livekit-service/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/livekit-service/tsconfig.app.json"
+      }
+    },
+    "room-service": {
+      "type": "application",
+      "root": "apps/room-service",
+      "entryFile": "main",
+      "sourceRoot": "apps/room-service/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/room-service/tsconfig.app.json"
+      }
+    },
+    "shared": {
+      "type": "library",
+      "root": "libs/shared",
+      "entryFile": "index",
+      "sourceRoot": "libs/shared/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/shared/tsconfig.lib.json"
+      }
+    },
+    "rabbitmq": {
+      "type": "library",
+      "root": "libs/rabbitmq",
+      "entryFile": "index",
+      "sourceRoot": "libs/rabbitmq/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/rabbitmq/tsconfig.lib.json"
+      }
+    },
+    "prisma": {
+      "type": "library",
+      "root": "libs/prisma",
+      "entryFile": "index",
+      "sourceRoot": "libs/prisma/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/prisma/tsconfig.lib.json"
+      }
+    },
+    "telemetry": {
+      "type": "library",
+      "root": "libs/telemetry",
+      "entryFile": "index",
+      "sourceRoot": "libs/telemetry/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/telemetry/tsconfig.lib.json"
+      }
+    },
+    "core": {
+      "type": "library",
+      "root": "libs/core",
+      "entryFile": "index",
+      "sourceRoot": "libs/core/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/core/tsconfig.lib.json"
+      }
+    },
+    "livekit": {
+      "type": "library",
+      "root": "libs/livekit",
+      "entryFile": "index",
+      "sourceRoot": "libs/livekit/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/livekit/tsconfig.lib.json"
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Room {
+  id              String   @id @default(uuid())
+  name            String   @unique
+  livekitRoomName String   @unique
+  maxParticipants Int      @default(10)
+  emptyTimeout    Int      @default(300)
+  metadata        String?
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  participants RoomParticipant[]
+
+  @@map("rooms")
+}
+
+model RoomParticipant {
+  id        String   @id @default(uuid())
+  roomId    String
+  identity  String
+  name      String?
+  metadata  String?
+  joinedAt  DateTime @default(now())
+  leftAt    DateTime?
+
+  room Room @relation(fields: [roomId], references: [id], onDelete: Cascade)
+
+  @@unique([roomId, identity])
+  @@map("room_participants")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String?
+  avatar    String?
+  metadata  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}

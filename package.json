@@ -1,0 +1,153 @@
+{
+  "name": "livekit-msa-server",
+  "version": "0.0.1",
+  "description": "LiveKit MSA Server with NestJS",
+  "author": "jaystevency",
+  "private": true,
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "nest build",
+    "build:api-gateway": "nest build api-gateway",
+    "build:livekit-service": "nest build livekit-service",
+    "build:room-service": "nest build room-service",
+    "build:all": "npm run build:api-gateway && npm run build:livekit-service && npm run build:room-service",
+    "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\" \"test/**/*.ts\"",
+    "start": "nest start",
+    "start:dev": "nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "node dist/apps/api-gateway/main",
+    "start:api-gateway": "nest start api-gateway",
+    "start:api-gateway:dev": "nest start api-gateway --watch",
+    "start:api-gateway:debug": "nest start api-gateway --debug --watch",
+    "start:livekit-service": "nest start livekit-service",
+    "start:livekit-service:dev": "nest start livekit-service --watch",
+    "start:livekit-service:debug": "nest start livekit-service --debug --watch",
+    "start:room-service": "nest start room-service",
+    "start:room-service:dev": "nest start room-service --watch",
+    "start:room-service:debug": "nest start room-service --debug --watch",
+    "lint": "eslint \"{apps,libs,test}/**/*.ts\" --fix",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "test:e2e:api-gateway": "jest --config ./apps/api-gateway/test/jest-e2e.json",
+    "test:e2e:livekit-service": "jest --config ./apps/livekit-service/test/jest-e2e.json",
+    "prepare": "is-ci || npx husky install",
+    "commit": "cz",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:studio": "prisma studio",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f",
+    "docker:build": "docker compose build"
+  },
+  "dependencies": {
+    "@nestjs/common": "^11.1.9",
+    "@nestjs/config": "^4.0.2",
+    "@nestjs/core": "^11.1.9",
+    "@nestjs/microservices": "^11.1.9",
+    "@nestjs/platform-express": "^11.1.9",
+    "@nestjs/swagger": "^11.2.3",
+    "@nestjs/terminus": "^11.0.0",
+    "@opentelemetry/auto-instrumentations-node": "^0.67.0",
+    "@opentelemetry/exporter-trace-otlp-http": "^0.208.0",
+    "@opentelemetry/resources": "^2.2.0",
+    "@opentelemetry/sdk-node": "^0.208.0",
+    "@opentelemetry/sdk-trace-base": "^2.2.0",
+    "@opentelemetry/semantic-conventions": "^1.38.0",
+    "@prisma/client": "^6.10.0",
+    "amqp-connection-manager": "^5.0.0",
+    "amqplib": "^0.10.9",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.3",
+    "dotenv": "^17.2.3",
+    "is-ci": "^3.0.1",
+    "livekit-server-sdk": "^2.9.1",
+    "nestjs-pino": "^4.4.1",
+    "pino": "^9.14.0",
+    "pino-http": "^10.5.0",
+    "pino-loki": "^2.6.0",
+    "pino-pretty": "^13.1.2",
+    "reflect-metadata": "^0.2.2",
+    "rimraf": "^3.0.2",
+    "rxjs": "^7.8.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
+    "@nestjs/cli": "^11.0.12",
+    "@nestjs/schematics": "^11.0.5",
+    "@nestjs/testing": "^11.1.9",
+    "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^22.10.1",
+    "@types/supertest": "^6.0.2",
+    "@typescript-eslint/eslint-plugin": "^8.15.0",
+    "@typescript-eslint/parser": "^8.15.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^9.15.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "husky": "^9.1.7",
+    "jest": "^29.7.0",
+    "prettier": "^3.3.3",
+    "prisma": "^6.10.0",
+    "source-map-support": "^0.5.21",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.2.5",
+    "ts-loader": "^9.5.1",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.7.2"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": ".",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "./coverage",
+    "testEnvironment": "node",
+    "roots": [
+      "<rootDir>/apps/",
+      "<rootDir>/libs/"
+    ],
+    "moduleNameMapper": {
+      "^@app/core(|/.*)$": "<rootDir>/libs/core/src/$1",
+      "^@app/shared(|/.*)$": "<rootDir>/libs/shared/src/$1",
+      "^@app/rabbitmq(|/.*)$": "<rootDir>/libs/rabbitmq/src/$1",
+      "^@app/prisma(|/.*)$": "<rootDir>/libs/prisma/src/$1",
+      "^@app/telemetry(|/.*)$": "<rootDir>/libs/telemetry/src/$1",
+      "^@app/livekit(|/.*)$": "<rootDir>/libs/livekit/src/$1"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  }
+}
