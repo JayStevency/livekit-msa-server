@@ -3,11 +3,13 @@ import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { Logger } from 'nestjs-pino';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import { join } from 'path';
 import { AppModule } from './app.module';
 import { ConfigProps } from '@app/core';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   app.useLogger(app.get(Logger));
   app.useGlobalPipes(
@@ -22,6 +24,13 @@ async function bootstrap() {
     origin: '*',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
+  });
+
+  // Serve static files (test-client.html)
+  // In Docker: __dirname = /app/dist/apps/api-gateway/apps/api-gateway/src
+  // public folder is at /app/public
+  app.useStaticAssets(join(__dirname, '..', '..', '..', '..', '..', '..', 'public'), {
+    prefix: '/',
   });
 
   const config = new DocumentBuilder()

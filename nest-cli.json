@@ -89,6 +89,15 @@
       "compilerOptions": {
         "tsConfigPath": "libs/livekit/tsconfig.lib.json"
       }
+    },
+    "llm": {
+      "type": "library",
+      "root": "libs/llm",
+      "entryFile": "index",
+      "sourceRoot": "libs/llm/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/llm/tsconfig.lib.json"
+      }
     }
   }
 }

@@ -34,6 +34,25 @@ export interface LiveKitProps {
   wsUrl: string;
 }
 
+export type LLMProviderType = 'ollama' | 'openai' | 'claude';
+
+export interface LLMProps {
+  provider: LLMProviderType;
+  ollama?: {
+    baseUrl: string;
+    model: string;
+  };
+  openai?: {
+    apiKey: string;
+    model: string;
+    baseUrl?: string;
+  };
+  claude?: {
+    apiKey: string;
+    model: string;
+  };
+}
+
 export interface ConfigProps {
   environment: string;
   appName: string;
@@ -47,5 +66,6 @@ export interface ConfigProps {
   telemetry: TelemetryProps;
   loki: LokiProps;
   livekit: LiveKitProps;
+  llm?: LLMProps;
   logLevel: string;
 }

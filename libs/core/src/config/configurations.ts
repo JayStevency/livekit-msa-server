@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as dotenv from 'dotenv';
 import * as path from 'path';
-import { ConfigProps } from './config.type';
+import { ConfigProps, LLMProviderType, LLMProps } from './config.type';
 
 const packageJson = JSON.parse(
   fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf8'),
@@ -86,8 +86,41 @@ export default (): ConfigProps => {
       apiSecret: data.LIVEKIT_API_SECRET || '',
       wsUrl: data.LIVEKIT_WS_URL || 'ws://localhost:7880',
     },
+    llm: buildLLMConfig(data),
     logLevel: data.LOG_LEVEL || 'info',
   };
 };
+
+function buildLLMConfig(data: Record<string, string>): LLMProps | undefined {
+  const provider = (data.LLM_PROVIDER || 'ollama') as LLMProviderType;
+
+  const config: LLMProps = {
+    provider,
+  };
+
+  if (provider === 'ollama' || data.OLLAMA_BASE_URL || data.OLLAMA_MODEL) {
+    config.ollama = {
+      baseUrl: data.OLLAMA_BASE_URL || 'http://localhost:11434',
+      model: data.OLLAMA_MODEL || 'llama3.2:3b',
+    };
+  }
+
+  if (provider === 'openai' || data.OPENAI_API_KEY) {
+    config.openai = {
+      apiKey: data.OPENAI_API_KEY || '',
+      model: data.OPENAI_MODEL || 'gpt-4o-mini',
+      baseUrl: data.OPENAI_BASE_URL,
+    };
+  }
+
+  if (provider === 'claude' || data.ANTHROPIC_API_KEY) {
+    config.claude = {
+      apiKey: data.ANTHROPIC_API_KEY || '',
+      model: data.CLAUDE_MODEL || 'claude-sonnet-4-20250514',
+    };
+  }
+
+  return config;
+}
 
 export { default as configurations } from './configurations';

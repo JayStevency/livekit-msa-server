@@ -187,6 +187,43 @@
         "type": "loki",
         "uid": "loki"
       },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 20
+      },
+      "id": 8,
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": true,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": true,
+        "sortOrder": "Descending",
+        "wrapLogMessage": false
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "editorMode": "builder",
+          "expr": "{container=\"livekit-voice-agent\"}",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Voice Agent Logs",
+      "type": "logs"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -271,7 +308,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 20
+        "y": 28
       },
       "id": 6,
       "options": {
@@ -311,7 +348,7 @@
         "h": 10,
         "w": 24,
         "x": 0,
-        "y": 26
+        "y": 34
       },
       "id": 7,
       "options": {

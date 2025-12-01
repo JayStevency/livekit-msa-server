@@ -29,7 +29,9 @@
       "@app/telemetry": ["libs/telemetry/src"],
       "@app/telemetry/*": ["libs/telemetry/src/*"],
       "@app/livekit": ["libs/livekit/src"],
-      "@app/livekit/*": ["libs/livekit/src/*"]
+      "@app/livekit/*": ["libs/livekit/src/*"],
+      "@app/llm": ["libs/llm/src"],
+      "@app/llm/*": ["libs/llm/src/*"]
     }
   }
 }
