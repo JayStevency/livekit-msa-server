@@ -105,12 +105,29 @@ cp docker.env.example docker.env
 ```bash
 # 모든 서비스 시작
 npm run docker:up
+# 또는
+docker compose up -d
 
 # 로그 확인
 npm run docker:logs
+# 또는
+docker compose logs -f
 
 # 서비스 중지
 npm run docker:down
+# 또는
+docker compose down
+
+# 특정 서비스만 재시작
+docker compose restart voice-agent
+docker compose restart api-gateway
+
+# 서비스 재빌드 후 시작
+docker compose up -d --build
+
+# 특정 서비스만 빌드
+docker compose build voice-agent
+docker compose build api-gateway
 ```
 
 ### 3. 접속
