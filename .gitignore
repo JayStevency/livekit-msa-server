@@ -44,6 +44,7 @@ lerna-debug.log*
 .claude/
 
 # Docker
+docker.env
 docker.env.local
 
 # Credentials (Google Cloud 등)
