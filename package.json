@@ -1,6 +1,6 @@
 {
   "name": "livekit-msa-server",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "LiveKit MSA Server with NestJS",
   "author": "jaystevency",
   "private": true,
