@@ -31,7 +31,9 @@
       "@app/livekit": ["libs/livekit/src"],
       "@app/livekit/*": ["libs/livekit/src/*"],
       "@app/llm": ["libs/llm/src"],
-      "@app/llm/*": ["libs/llm/src/*"]
+      "@app/llm/*": ["libs/llm/src/*"],
+      "@app/redis": ["libs/redis/src"],
+      "@app/redis/*": ["libs/redis/src/*"]
     }
   }
 }

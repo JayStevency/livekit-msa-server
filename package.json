@@ -67,6 +67,7 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.3",
     "dotenv": "^17.2.3",
+    "ioredis": "^5.4.1",
     "is-ci": "^3.0.1",
     "livekit-server-sdk": "^2.9.1",
     "nestjs-pino": "^4.4.1",
@@ -132,7 +133,8 @@
       "^@app/rabbitmq(|/.*)$": "<rootDir>/libs/rabbitmq/src/$1",
       "^@app/prisma(|/.*)$": "<rootDir>/libs/prisma/src/$1",
       "^@app/telemetry(|/.*)$": "<rootDir>/libs/telemetry/src/$1",
-      "^@app/livekit(|/.*)$": "<rootDir>/libs/livekit/src/$1"
+      "^@app/livekit(|/.*)$": "<rootDir>/libs/livekit/src/$1",
+      "^@app/redis(|/.*)$": "<rootDir>/libs/redis/src/$1"
     }
   },
   "config": {
