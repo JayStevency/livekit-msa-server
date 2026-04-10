@@ -59,3 +59,6 @@ __pycache__/
 *.so
 .venv/
 venv/
+
+# OMC
+.omc/
